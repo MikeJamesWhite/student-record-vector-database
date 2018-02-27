@@ -48,10 +48,20 @@ int main( int argc, char * argv[] ) {
             printf("Call saveDatabase()");
         }
         else if (in == '3') { // query the database for information regarding an existing student
-            printf("Call queryStudent()");
+            string studentNum;
+            cout << "Enter student number: ";
+            cin >> studentNum;
+            cout << "Searching for " + studentNum + "...\n";
+            WHTMIC023::queryStudent(database, studentNum);
         }
         else if (in == '4') { // add a grade to an existing student record
-            printf("Call gradeStudent()");
+            string grade;
+            string studentNum;
+            cout << "Enter student number: ";
+            cin >> studentNum;
+            cout << "Enter grade: ";
+            cin >> grade;
+            WHTMIC023::gradeStudent(database, studentNum, grade);
         }
         else if (in == 'x') { // exit
             running = false;
@@ -59,6 +69,5 @@ int main( int argc, char * argv[] ) {
         else {
             printf("Unrecognized command. Try again.");
         }
-        printf("\n");
     }
 }
