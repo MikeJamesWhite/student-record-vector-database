@@ -12,14 +12,14 @@ namespace WHTMIC023 {
         std::string classRecord;
     };
 
-    void addStudent( std::vector<StudentRecord>& database, string name, string surname, string studentNum );
+    void addStudent( string name, string surname, string studentNum, string classRecord );
 
-    void saveDatabase( std::vector<StudentRecord>& database, const char* filepath );
+    void saveDatabase( const char* filepath );
 
-    std::vector<StudentRecord>& readDatabase( const char* filepath );
+    void readDatabase( const char* filepath );
 
-    void queryStudent( std::vector<StudentRecord>& database, string studentNum );
+    void queryStudent( string studentNum );
 
-    void gradeStudent( std::vector<StudentRecord>& database, string studentNum, string grade );
+    void gradeStudent( string studentNum );
 }
 #endif

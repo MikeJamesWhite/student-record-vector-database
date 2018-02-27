@@ -1,20 +1,24 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
 #include <fstream>
 #include "DatabaseLib.h"
 
 using std::string;
 using std::vector;
+using std::cout;
 using WHTMIC023::StudentRecord;
+
+vector<StudentRecord> database;
  
-void WHTMIC023::addStudent( vector<StudentRecord>& database, string name, string surname, string studentNum ) {
-    StudentRecord record = {name, surname, studentNum, ""};
+void WHTMIC023::addStudent( string name, string surname, string studentNum, string classRecord ) {
+    StudentRecord record = {name, surname, studentNum, classRecord};
     database.push_back(record);
-    std::cout << "Added student record to database.\n";
+    cout << "Added student record to database.\n";
 }
 
-void WHTMIC023::saveDatabase( vector<StudentRecord>& database, const char* filepath ) {
+void WHTMIC023::saveDatabase( const char* filepath ) {
     std::ofstream outFile;
     outFile.open(filepath);
     for (int i = 0; i < database.size(); i++) {
@@ -22,39 +26,68 @@ void WHTMIC023::saveDatabase( vector<StudentRecord>& database, const char* filep
         outFile << current << std::endl;
     }
     outFile.close();
-    std::cout << "Saved database to file.";
+    cout << "Saved database to file.\n";
 }
 
-vector<StudentRecord>& WHTMIC023::readDatabase( const char* filepath ) {
-    vector<StudentRecord> database;
+void WHTMIC023::readDatabase( const char* filepath ) {
+    vector<StudentRecord>().swap(database);
     std::ifstream inFile;
     inFile.open(filepath);
-    
+    string line;
+    while (getline(inFile, line)) {
+        std::stringstream split(line);
+        string token;
+        int count = 0;
+        StudentRecord newRecord;
+        while (getline(split, token, ' ')) {
+            if (count == 0)
+                newRecord.name = token;
+            if (count == 1)
+                newRecord.surname = token;
+            if (count == 2)
+                newRecord.studentNum = token;
+            if (count == 3)
+                newRecord.classRecord = token;
+            else
+                newRecord.classRecord += " " + token;
+            count++;
+        }
+        database.push_back(newRecord);
+    }
     inFile.close();
-    return database;
+    cout << "Imported database from file.\n";
 }
 
-void WHTMIC023::queryStudent( vector<StudentRecord>& database, string studentNum ) {
+void WHTMIC023::queryStudent( string studentNum ) {
     std::cout << database.size() +"\n";
     for (int i = 0; i < database.size(); i++) {
         if (database[i].studentNum == studentNum) {
-            std::cout << "Found Match!\n";
-            std::cout << "Name: " + database[i].name +"\n";
-            std::cout << "Surname: " + database[i].surname +"\n";
-            std::cout << "Grades: " + database[i].classRecord +"\n";
+            cout << "Name: " + database[i].name +"\n";
+            cout << "Surname: " + database[i].surname +"\n";
+            cout << "Grades: " + database[i].classRecord +"\n";
             return;
         }
     }
-    std::cout << "No match found...\n";
+    cout << "No match found...\n";
 }
 
-void WHTMIC023::gradeStudent( vector<StudentRecord>& database, string studentNum, string grade ) {
+void WHTMIC023::gradeStudent( string studentNum) {
     for (int i = 0; i < database.size(); i++) {
         if (database[i].studentNum == studentNum) {
-            database[i].classRecord += (grade + " ");
-            std::cout << "Added grade successfully!\n";
+            int total = 0;
+            int count = 0;
+            int current;
+            string token;
+            std::stringstream grades(database[i].classRecord);
+            while (getline(grades, token, ' ')) {
+                std::stringstream(token) >> current;
+                total += current;
+                count+=1;
+            }
+            int average = total / count;
+            cout << "Average grade: " << average << std::endl;
             return;
         }
     }
-    std::cout << "The entered student number could not be found...\n";
+    cout << "The entered student number could not be found...\n";
 }
