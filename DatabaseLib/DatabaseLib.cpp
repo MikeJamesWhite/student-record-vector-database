@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 #include "DatabaseLib.h"
 
 using std::string;
@@ -13,12 +14,24 @@ void WHTMIC023::addStudent( vector<StudentRecord>& database, string name, string
     std::cout << "Added student record to database.\n";
 }
 
-void WHTMIC023::saveDatabase( string filepath ) {
-
+void WHTMIC023::saveDatabase( vector<StudentRecord>& database, const char* filepath ) {
+    std::ofstream outFile;
+    outFile.open(filepath);
+    for (int i = 0; i < database.size(); i++) {
+        string current = database[i].name + " " + database[i].surname + " " + database[i].studentNum + " " + database[i].classRecord;
+        outFile << current << std::endl;
+    }
+    outFile.close();
+    std::cout << "Saved database to file.";
 }
 
-vector<WHTMIC023::StudentRecord>& WHTMIC023::readDatabase( string filepath ) {
-
+vector<StudentRecord>& WHTMIC023::readDatabase( const char* filepath ) {
+    vector<StudentRecord> database;
+    std::ifstream inFile;
+    inFile.open(filepath);
+    
+    inFile.close();
+    return database;
 }
 
 void WHTMIC023::queryStudent( vector<StudentRecord>& database, string studentNum ) {

@@ -42,10 +42,16 @@ int main( int argc, char * argv[] ) {
             WHTMIC023::addStudent(database, name, surname, studentNum);
         }
         else if (in == '1') { // read exisiting database from file
-            printf("Call readDatabase()");
+            string filepath;
+            cout << "Enter file path: ";
+            cin >> filepath;
+            database = WHTMIC023::readDatabase(filepath.c_str());
         }
         else if (in == '2') { // save the current database to file
-            printf("Call saveDatabase()");
+            string filepath;
+            cout << "Enter file path: ";
+            cin >> filepath;
+            WHTMIC023::saveDatabase(database, filepath.c_str());
         }
         else if (in == '3') { // query the database for information regarding an existing student
             string studentNum;

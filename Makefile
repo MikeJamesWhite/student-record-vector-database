@@ -12,4 +12,5 @@ clean:
 	rm -f *.o ./driver
 
 run:
+	export LD_LIBRARY_PATH=DatabaseLib/
 	./driver 

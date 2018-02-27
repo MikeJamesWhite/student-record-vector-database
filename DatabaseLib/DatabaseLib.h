@@ -14,9 +14,9 @@ namespace WHTMIC023 {
 
     void addStudent( std::vector<StudentRecord>& database, string name, string surname, string studentNum );
 
-    void saveDatabase( string filepath );
+    void saveDatabase( std::vector<StudentRecord>& database, const char* filepath );
 
-    std::vector<StudentRecord>& readDatabase( string filepath );
+    std::vector<StudentRecord>& readDatabase( const char* filepath );
 
     void queryStudent( std::vector<StudentRecord>& database, string studentNum );
 
