@@ -1,7 +1,14 @@
 #include <iostream>
-using namespace std;
+#include <vector>
+#include <cstdlib>
+#include "DatabaseLib.h"
 
-int printMenu() {
+using std::string;
+using std::vector;
+using std::cin;
+using std::cout;
+
+void printMenu() {
     printf("\n0: Add Student\n");
     printf("1: Read Database\n");
     printf("2: Save Database\n");
@@ -10,28 +17,43 @@ int printMenu() {
     printf("x: Exit\n");
 }
 
+void clear() {
+    system("clear");
+}
+
 int main( int argc, char * argv[] ) {
     bool running = true;
+    vector<WHTMIC023::StudentRecord> database;
     while(running) {
         printMenu();
         char in;
         cin >> in;
-        if (in == '0') {
-            printf("Request student details and call addStudent()");
+        clear();
+        if (in == '0') { // add student
+            string name;
+            string surname;
+            string studentNum;
+            cout << "Enter name: ";
+            cin >> name;
+            cout << "Enter surname: ";
+            cin >> surname;
+            cout << "Enter student number: ";
+            cin >> studentNum;
+            WHTMIC023::addStudent(database, name, surname, studentNum);
         }
-        else if (in == '1') {
+        else if (in == '1') { // read exisiting database from file
             printf("Call readDatabase()");
         }
-        else if (in == '2') {
+        else if (in == '2') { // save the current database to file
             printf("Call saveDatabase()");
         }
-        else if (in == '3') {
+        else if (in == '3') { // query the database for information regarding an existing student
             printf("Call queryStudent()");
         }
-        else if (in == '4') {
+        else if (in == '4') { // add a grade to an existing student record
             printf("Call gradeStudent()");
         }
-        else if (in == 'x') {
+        else if (in == 'x') { // exit
             running = false;
         }
         else {
