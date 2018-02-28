@@ -9,7 +9,7 @@ using std::cin;
 using std::cout;
 
 void printMenu() {
-    printf("\n0: Add Student\n");
+    printf("0: Add Student\n");
     printf("1: Read Database\n");
     printf("2: Save Database\n");
     printf("3: Display Student Data\n");
@@ -78,5 +78,7 @@ int main( int argc, char * argv[] ) {
         else {
             printf("Unrecognized command. Try again.\n");
         }
+        if (running)
+            cout << std::endl;
     }
 }
