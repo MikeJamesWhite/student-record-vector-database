@@ -22,6 +22,7 @@ void clear() {
 }
 
 int main( int argc, char * argv[] ) {
+    clear();
     bool running = true;
     while(running) {
         printMenu();
@@ -29,11 +30,8 @@ int main( int argc, char * argv[] ) {
         cin >> in;
         clear();
         if (in == '0') { // add student
-            string name;
-            string surname;
-            string studentNum;
+            string name, surname, studentNum, grade;
             string classRecord = "";
-            string grade;
             cout << "Enter name: ";
             cin >> name;
             cout << "Enter surname: ";
@@ -69,7 +67,6 @@ int main( int argc, char * argv[] ) {
             WHTMIC023::queryStudent(studentNum);
         }
         else if (in == '4') { // add a grade to an existing student record
-            string grade;
             string studentNum;
             cout << "Enter student number: ";
             cin >> studentNum;
@@ -79,7 +76,7 @@ int main( int argc, char * argv[] ) {
             running = false;
         }
         else {
-            printf("Unrecognized command. Try again.");
+            printf("Unrecognized command. Try again.\n");
         }
     }
 }

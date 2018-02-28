@@ -4,7 +4,7 @@
 using std::string;
 
 namespace WHTMIC023 {
-
+    
     struct StudentRecord {
         std::string name;
         std::string surname;

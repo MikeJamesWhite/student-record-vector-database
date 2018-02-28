@@ -30,7 +30,7 @@ void WHTMIC023::saveDatabase( const char* filepath ) {
 }
 
 void WHTMIC023::readDatabase( const char* filepath ) {
-    vector<StudentRecord>().swap(database);
+    database.clear();
     std::ifstream inFile;
     inFile.open(filepath);
     string line;
@@ -42,11 +42,11 @@ void WHTMIC023::readDatabase( const char* filepath ) {
         while (getline(split, token, ' ')) {
             if (count == 0)
                 newRecord.name = token;
-            if (count == 1)
+            else if (count == 1)
                 newRecord.surname = token;
-            if (count == 2)
+            else if (count == 2)
                 newRecord.studentNum = token;
-            if (count == 3)
+            else if (count == 3)
                 newRecord.classRecord = token;
             else
                 newRecord.classRecord += " " + token;
