@@ -1,3 +1,11 @@
+/**
+ * DatabaseLib.h
+ * Author: Mike James White (WHTMIC023)
+ *
+ * Header file for the DatabaseLib library, which provides functionality for creating,
+ * storing and grading student records (as well as providing file IO functionality).
+ */
+
 #ifndef DATABASEDRIVER_H
 #define DATABASEDRIVER_H
 

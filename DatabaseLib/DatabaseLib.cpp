@@ -1,3 +1,10 @@
+/**
+ * DatabaseLib.cpp
+ * Author: Mike James White (WHTMIC023)
+ * 
+ * Implementations of the methods specified by the DatabaseLib header file.
+ */
+
 #include <iostream>
 #include <vector>
 #include <string>

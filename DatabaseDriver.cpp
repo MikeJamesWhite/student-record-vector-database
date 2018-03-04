@@ -1,3 +1,11 @@
+/**
+ * DatabaseDriver.cpp
+ * Author: Mike James White (WHTMIC023)
+ * 
+ * Driver program which provides a command line interface to make use of the functionality
+ * provided by the DatabaseLib library.
+ */
+
 #include <iostream>
 #include <vector>
 #include <cstdlib>
@@ -24,11 +32,13 @@ void clear() {
 int main( int argc, char * argv[] ) {
     clear();
     bool running = true;
+
     while(running) {
         printMenu();
         char in;
         cin >> in;
         clear();
+        
         if (in == '0') { // add student
             string name, surname, studentNum, grade;
             string classRecord = "";
